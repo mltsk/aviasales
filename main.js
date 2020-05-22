@@ -8,17 +8,17 @@ const fromSearch = document.querySelector('.form-search'),
     otherCheapTickets = document.querySelector('#other-cheap-tickets');
 
 //data
-const citiesApi = 'database/cities.json',
+const citiesApi = 'https://raw.githubusercontent.com/mltsk/aviasales/master/dataBase/cities.json',
     proxy = 'https://cors-anywhere.herokuapp.com/',
     API_KEY = 'e208abad79268c549ec706edc1bb940c',
-    calendar = 'http://min-prices.aviasales.ru/calendar_preload',
+    calendar = 'https://min-prices.aviasales.ru/calendar_preload',
     MAX_COUNT = 10;
 
 let city = [];
 
 //Функции 
 
-const getData = (url, callback, reject) => {
+const getData = (url, callback, reject = console.log()) => {
     const request = new XMLHttpRequest();
 
     request.open('GET', url);
@@ -29,7 +29,8 @@ const getData = (url, callback, reject) => {
         if(request.status === 200) {
             callback(request.response);
         }  else {
-            reject(request.status);
+            console.log(request.status);
+            alert('В этом направлении нет рейсов');
         }
     });
 
